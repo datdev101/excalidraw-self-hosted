@@ -1,7 +1,7 @@
 services:
-  excalidraw-fe:
+  excalidraw-frontend:
     build:
-      context: fe
+      context: frontend
       args:
         - NODE_ENV=production
     container_name: excalidraw
@@ -15,14 +15,14 @@ services:
       # change env not work --> must change in .env.production
       - NODE_ENV=production
     volumes:
-      - ./fe/:/opt/node_app/app:delegated
-      - ./fe/package.json:/opt/node_app/package.json
-      - ./fe/yarn.lock:/opt/node_app/yarn.lock
+      - ./frontend/:/opt/node_app/app:delegated
+      - ./frontend/package.json:/opt/node_app/package.json
+      - ./frontend/yarn.lock:/opt/node_app/yarn.lock
       - notused:/opt/node_app/app/node_modules
 
   excalidraw-storage-backend:
     build:
-      context: be
+      context: storage-backend
       target: production
     tty: true
     stdin_open: true
