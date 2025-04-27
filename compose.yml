@@ -23,14 +23,10 @@ services:
   excalidraw-storage-backend:
     build:
       context: storage-backend
-      target: production
-    tty: true
-    stdin_open: true
     ports:
       - "8080:8080"
     environment:
-      STORAGE_URI: ""
-      ENABLE_S3_BACKEND: false
+      - STORAGE_URI=""
 
   excalidraw-room:
     image: excalidraw/excalidraw-room:latest
