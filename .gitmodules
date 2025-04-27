@@ -1,0 +1,6 @@
+[submodule "frontend"]
+	path = frontend
+	url = https://github.com/datdev101/excalidraw-frontend.git
+[submodule "storage-backend"]
+	path = storage-backend
+	url = https://github.com/datdev101/excalidraw-storage-backend.git

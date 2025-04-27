@@ -1,0 +1,41 @@
+services:
+  excalidraw-fe:
+    build:
+      context: fe
+      args:
+        - NODE_ENV=production
+    container_name: excalidraw
+    ports:
+      - "3000:80"
+    restart: on-failure
+    stdin_open: true
+    healthcheck:
+      disable: true
+    environment:
+      # change env not work --> must change in .env.production
+      - NODE_ENV=production
+    volumes:
+      - ./fe/:/opt/node_app/app:delegated
+      - ./fe/package.json:/opt/node_app/package.json
+      - ./fe/yarn.lock:/opt/node_app/yarn.lock
+      - notused:/opt/node_app/app/node_modules
+
+  excalidraw-storage-backend:
+    build:
+      context: be
+      target: production
+    tty: true
+    stdin_open: true
+    ports:
+      - "8080:8080"
+    environment:
+      STORAGE_URI: ""
+      ENABLE_S3_BACKEND: false
+
+  excalidraw-room:
+    image: excalidraw/excalidraw-room:latest
+    ports:
+      - 5000:80
+
+volumes:
+  notused:
